@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rejectWithoutSession } from '@/lib/apiSession';
 import { sendTelegramBlobFromServer } from '@/lib/telegram';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
+  const auth = await rejectWithoutSession();
+  if (auth) return auth;
+
   try {
     const form = await req.formData();
     const token = form.get('token')?.toString()?.trim();

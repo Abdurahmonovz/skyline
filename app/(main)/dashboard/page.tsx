@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { StorageService } from '@/lib/storage';
+import { monthlyTotalBalls } from '@/lib/monthlyScoreUtils';
+import {
+  PASS_PHASE_MONTH_COUNT,
+  PASS_THRESHOLD_AFTER_PHASE,
+  PASS_THRESHOLD_FIRST_PHASE,
+} from '@/lib/scoreConstants';
 import StatsCards from '@/components/dashboard/StatsCards';
 import ActivityChart from '@/components/dashboard/ActivityChart';
 import { CardSkeleton } from '@/components/ui/LoadingSkeleton';
@@ -25,7 +31,7 @@ export default function DashboardPage() {
       const groups = StorageService.getGroups();
       const students = StorageService.getStudents();
       const attendance = StorageService.getAttendance();
-      const scores = StorageService.getScores();
+      const monthlySheets = StorageService.getMonthlyScoreSheets();
 
       const today = new Date().toISOString().split('T')[0];
       const absentToday = attendance.filter(
@@ -33,10 +39,10 @@ export default function DashboardPage() {
       ).length;
 
       const studentScores = students.map((student) => {
-        const sc = scores.filter((s) => s.studentId === student.id);
+        const sheets = monthlySheets.filter((s) => s.studentId === student.id);
         const avgScore =
-          sc.length > 0
-            ? sc.reduce((sum, s) => sum + s.totalScore, 0) / sc.length
+          sheets.length > 0
+            ? sheets.reduce((sum, s) => sum + monthlyTotalBalls(s), 0) / sheets.length
             : 0;
         return {
           ...student,
@@ -90,9 +96,17 @@ export default function DashboardPage() {
       <ActivityChart />
 
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
           🏆 {t('dashboard.topStudents')}
         </h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          {t('dashboard.passThresholds', {
+            months: PASS_PHASE_MONTH_COUNT,
+            low: PASS_THRESHOLD_FIRST_PHASE,
+            high: PASS_THRESHOLD_AFTER_PHASE,
+            
+          })}
+        </p>
         <div className="space-y-3">
           {stats.topStudents.map((student, index) => (
             <div
@@ -111,7 +125,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div className="text-2xl font-bold text-emerald-600">
-                {student.avgScore.toFixed(0)}%
+                {student.avgScore.toFixed(0)}
               </div>
             </div>
           ))}
@@ -120,3 +134,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

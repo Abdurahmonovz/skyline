@@ -39,6 +39,8 @@ const uz = {
     subtitle: 'Skyline Education arxiviga xush kelibsiz',
     topStudents: 'Eng yaxshi oquvchilar',
     avgScore: 'Ortacha ball',
+    passThresholds:
+      'Oy bo‘yicha o‘tish: birinchi {months} ta ketma-ket oy {low}+ ball, undan keyingi har oy {high}+ ball.',
     activity: 'Songgi harakatlar',
     noActivity: 'Hozircha harakat yoq',
   },
@@ -117,17 +119,50 @@ const uz = {
     title: 'Baholar va reyting',
     subtitle: 'Oquvchi ballarini kuzatish',
     top5: 'Top 5 oquvchi',
+    top5ForMonth: 'Tanlangan oy ({month}) bo‘yicha jami ball',
     avg: 'Ortacha ball',
     monthly: 'Oy boyicha',
     addScore: 'Ball qoshish',
     studentScores: 'Oquvchi ballari',
-    homework: 'Uy vazifasi (0–100)',
-    activity: 'Faollik (0–100)',
-    exam: 'Imtihon (0–100)',
+    homework: 'Uy vazifasi',
+    activity: 'Faollik',
+    exam: 'Imtihon (oy oxiri, 0–{maxE})',
     total: 'Jami ball',
     modalAdd: 'Ball qoshish',
     tableAvg: 'Ort:',
     tableTotal: 'Jami:',
+    selectMonth: 'Oy',
+    rulesHint:
+      'Haftada 3 kun, oyda 4 hafta — jami {lessons} dars. Har dars uchun uy vazifasi (0–{maxH}) va faollik (0–{maxA}); oy oxirida bitta imtihon balli (0–{maxE}). Oquvchi uchun hisoblangan ketma-ket birinchi {phaseMonths} oyda jami kamida {passLow} ball, undan keyingi har oyda kamida {passHigh} ball bo‘lsa — o‘tadi, past bo‘lsa yiqiladi.',
+    ballsUnit: 'ball',
+    avgAcrossMonths: 'Barcha oylar bo‘yicha o‘rtacha',
+    passed: 'O‘tdi',
+    failed: 'Yiqildi',
+    threshold: 'Chegara',
+    lessonsIntro:
+      'Har qator — bitta dars kuni. 12 dars davomida uy vazifasi va faollikni har kungi dars bo‘yicha kiriting; imtihon ballini pastdagi maydonga yozing.',
+    homeworkShort: 'Uy vaz.',
+    activityShort: 'Faollik',
+    lessonN: 'Dars {n}',
+    examBlockTitle: 'Oy oxiridagi imtihon',
+    examBlockHelp:
+      '12 ta dars tugagach, shu oy uchun imtihon ballini shu yerga qo‘shing. Yakuniy natija barcha dars ballari va imtihon yig‘indisi.',
+    homeworkMissedCol: 'UY bajarilmagan',
+    homeworkMissedHint:
+      'Har dars uchun “UY bajarilmagan” belgisini qo‘ying. {min} yoki undan ko‘p dars belgilanganda «Saqlash» bosilganda o‘quvchiga Telegram ogohlantirish yuboriladi; qaysi darslar belgilanganligi o‘zgarsa, yana yuboriladi.',
+    homeworkMissedStatus:
+      'Hozir «UY bajarilmagan» darslar: {n} ta. {min} yoki undan ko‘p bo‘lsa, saqlaganda Telegram xabari ketadi.',
+    homeworkMissedTelegram:
+      'Hurmatli {name}! {yearMonth} oyida darslar {lessons} bo‘yicha uy vazifangiz qilinmagan. Iltimos, qolib ketgan topshiriqlarni tez orada qilib qo‘ying. Aks holda o‘quv markazdan chetlashtirilishingiz mumkin.',
+    homeworkWarnActivity: 'Telegram: uy vazifasi ogohlantirishi — {name} ({yearMonth})',
+    homeworkNotifyOk: 'Telegram orqali uy vazifasi bo‘yicha ogohlantirish yuborildi.',
+    homeworkNotifyNoTg:
+      'Ogohlantirish yuborilmadi: o‘quvchida Telegram username yoki ID yo‘q.',
+    homeworkNotifyNoToken: 'Ogohlantirish yuborilmadi: Sozlamalarda bot tokeni yo‘q.',
+    homeworkNotifyFail: 'Ogohlantirish yuborilmadi: {detail}',
+    homeworkNotifyAlready:
+      'Bu darslar ro‘yxati bo‘yicha ogohlantirish allaqachon yuborilgan. Yangi dars qo‘shsangiz yoki belgilarni kamaytirib qayta saqlang.',
+    saveError: 'Saqlashda xato: {detail}',
   },
   settings: {
     title: 'Sozlamalar',
@@ -192,6 +227,8 @@ const ru = {
     subtitle: 'Архив Skyline Education',
     topStudents: 'Лучшие ученики',
     avgScore: 'Средний балл',
+    passThresholds:
+      'Порог по месяцам: первые {months} месяца подряд — от {low} баллов, далее каждый месяц — от {high}.',
     activity: 'Недавняя активность',
     noActivity: 'Нет записей',
   },
@@ -270,17 +307,45 @@ const ru = {
     title: 'Оценки и рейтинг',
     subtitle: 'Успеваемость',
     top5: 'Топ 5',
+    top5ForMonth: 'Сумма баллов за {month}',
     avg: 'Средний балл',
     monthly: 'За месяц',
     addScore: 'Добавить оценку',
     studentScores: 'Оценки',
-    homework: 'ДЗ (0–100)',
-    activity: 'Активность (0–100)',
-    exam: 'Экзамен (0–100)',
+    homework: 'ДЗ',
+    activity: 'Активность',
+    exam: 'Экзамен (конец месяца, 0–{maxE})',
     total: 'Итого',
     modalAdd: 'Добавить оценку',
     tableAvg: 'Ср.:',
     tableTotal: 'Сумма:',
+    selectMonth: 'Месяц',
+    rulesHint:
+      '3 занятия в неделю, 4 недели в месяце — {lessons} занятий. За каждое занятие: ДЗ (0–{maxH}) и активность (0–{maxA}); в конце месяца один экзамен (0–{maxE}). Первые {phaseMonths} месяца подряд — не менее {passLow} баллов, далее каждый месяц — не менее {passHigh} — зачёт; ниже порога — не зачёт.',
+    ballsUnit: 'б.',
+    avgAcrossMonths: 'Среднее по всем месяцам',
+    passed: 'Зачёт',
+    failed: 'Не зачёт',
+    threshold: 'Порог',
+    lessonsIntro: 'Каждая строка — одно занятие. Внесите баллы за 12 занятий; экзамен — в поле ниже.',
+    homeworkShort: 'ДЗ',
+    activityShort: 'Активн.',
+    lessonN: 'Занятие {n}',
+    examBlockTitle: 'Экзамен в конце месяца',
+    examBlockHelp: 'После 12 занятий введите балл за экзамен. Итог = сумма за занятия + экзамен.',
+    homeworkMissedCol: 'Нет ДЗ',
+    homeworkMissedHint:
+      'Отметьте занятия без ДЗ. При {min}+ и нажатии «Сохранить» уйдёт Telegram; если набор занятий изменится — снова.',
+    homeworkMissedStatus: 'Сейчас без ДЗ отмечено: {n}. При {min}+ при сохранении уйдёт Telegram.',
+    homeworkMissedTelegram:
+      'Уважаемый(ая) {name}! За {yearMonth} по занятиям {lessons} домашнее задание не выполнено. Пожалуйста, выполните задания. Иначе возможно отстранение от учебного центра.',
+    homeworkWarnActivity: 'Telegram: предупреждение по ДЗ — {name} ({yearMonth})',
+    homeworkNotifyOk: 'Предупреждение о домашнем задании отправлено в Telegram.',
+    homeworkNotifyNoTg: 'Не отправлено: нет Telegram username или ID у ученика.',
+    homeworkNotifyNoToken: 'Не отправлено: нет токена бота в настройках.',
+    homeworkNotifyFail: 'Не отправлено: {detail}',
+    homeworkNotifyAlready: 'По этому списку предупреждение уже отправлено. Измените отметки и сохраните снова.',
+    saveError: 'Ошибка сохранения: {detail}',
   },
   settings: {
     title: 'Настройки',
@@ -345,6 +410,8 @@ const en = {
     subtitle: 'Skyline Education archive',
     topStudents: 'Top students',
     avgScore: 'Average score',
+    passThresholds:
+      'Monthly pass line: first {months} consecutive months need {low}+ points; each month after needs {high}+.',
     activity: 'Recent activity',
     noActivity: 'No recent activity',
   },
@@ -423,17 +490,45 @@ const en = {
     title: 'Scores & rankings',
     subtitle: 'Track performance',
     top5: 'Top 5 students',
+    top5ForMonth: 'Total points for {month}',
     avg: 'Average',
     monthly: 'This month',
     addScore: 'Add score',
     studentScores: 'Student scores',
-    homework: 'Homework (0–100)',
-    activity: 'Activity (0–100)',
-    exam: 'Exam (0–100)',
+    homework: 'Homework',
+    activity: 'Activity',
+    exam: 'Exam (end of month, 0–{maxE})',
     total: 'Total',
     modalAdd: 'Add score',
     tableAvg: 'Avg:',
     tableTotal: 'Total:',
+    selectMonth: 'Month',
+    rulesHint:
+      '3 classes/week × 4 weeks = {lessons} lessons/month. Per lesson: homework (0–{maxH}) and participation (0–{maxA}); one exam at month end (0–{maxE}). For each student, the first {phaseMonths} consecutive months need at least {passLow} points total; each later month needs at least {passHigh} — pass; below that — fail.',
+    ballsUnit: 'pts',
+    avgAcrossMonths: 'Avg. across months',
+    passed: 'Pass',
+    failed: 'Fail',
+    threshold: 'Threshold',
+    lessonsIntro: 'Each row is one lesson. Enter homework and activity for all 12 lessons; add the exam score below.',
+    homeworkShort: 'HW',
+    activityShort: 'Partic.',
+    lessonN: 'Lesson {n}',
+    examBlockTitle: 'End-of-month exam',
+    examBlockHelp: 'After 12 lessons, enter the exam score here. Final total = all lesson points + exam.',
+    homeworkMissedCol: 'HW missed',
+    homeworkMissedHint:
+      'Mark missed homework per lesson. At {min}+ misses, Save sends Telegram; if the set of lessons changes, it sends again.',
+    homeworkMissedStatus: 'Missed homework (marked): {n}. At {min}+, Save triggers Telegram.',
+    homeworkMissedTelegram:
+      'Dear {name}, for {yearMonth} homework was not done for lessons {lessons}. Please complete it soon. Otherwise you may be removed from the center.',
+    homeworkWarnActivity: 'Telegram: homework warning — {name} ({yearMonth})',
+    homeworkNotifyOk: 'Homework warning sent via Telegram.',
+    homeworkNotifyNoTg: 'Not sent: student has no Telegram username or ID.',
+    homeworkNotifyNoToken: 'Not sent: no bot token in Settings.',
+    homeworkNotifyFail: 'Could not send: {detail}',
+    homeworkNotifyAlready: 'A warning for this exact set of lessons was already sent. Change the checkmarks and save again.',
+    saveError: 'Save error: {detail}',
   },
   settings: {
     title: 'Settings',
@@ -480,6 +575,17 @@ function resolve(path: string, tree: Record<string, unknown>): string {
   return typeof cur === 'string' ? cur : path;
 }
 
-export function translate(locale: Locale, path: string): string {
-  return resolve(path, messages[locale] as unknown as Record<string, unknown>);
+export function translate(
+  locale: Locale,
+  path: string,
+  vars?: Record<string, string | number>
+): string {
+  let s = resolve(path, messages[locale] as unknown as Record<string, unknown>);
+  if (vars) {
+    for (const [k, v] of Object.entries(vars)) {
+      const needle = `{${k}}`;
+      s = s.split(needle).join(String(v));
+    }
+  }
+  return s;
 }

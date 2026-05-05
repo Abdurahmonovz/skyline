@@ -18,7 +18,7 @@ type ThemeMode = 'light' | 'dark';
 type LocaleContextValue = {
   locale: Locale;
   setLocale: (l: Locale) => void;
-  t: (path: string) => string;
+  t: (path: string, vars?: Record<string, string | number>) => string;
 };
 
 type ThemeContextValue = {
@@ -82,7 +82,10 @@ export function AppProviders({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const t = useCallback((path: string) => translate(locale, path), [locale]);
+  const t = useCallback(
+    (path: string, vars?: Record<string, string | number>) => translate(locale, path, vars),
+    [locale]
+  );
 
   const localeValue = useMemo(
     () => ({ locale, setLocale, t }),

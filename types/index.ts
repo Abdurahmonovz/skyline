@@ -30,6 +30,7 @@ export interface Attendance {
   status: 'present' | 'absent' | 'late';
 }
 
+/** Eski yozuvlar (migratsiya uchun saqlanadi) */
 export interface Score {
   id: string;
   studentId: string;
@@ -41,9 +42,28 @@ export interface Score {
   totalScore: number;
 }
 
+/** Har bir dars kuni: uy vazifasi + faollik */
+export interface LessonSlotScore {
+  homework: number;
+  activity: number;
+  /** Uy vazifasi bajarilmagan (oy ichida 3+ bo‘lsa Telegram ogohlantirish) */
+  homeworkMissed?: boolean;
+}
+
+/** Oy uchun bitta varaqa: 12 dars + oy oxiridagi imtihon balli */
+export interface MonthlyScoreSheet {
+  id: string;
+  studentId: string;
+  groupId: string;
+  /** YYYY-MM */
+  yearMonth: string;
+  lessons: LessonSlotScore[];
+  examScore: number;
+}
+
 export interface Activity {
   id: string;
-  type: 'attendance' | 'score' | 'student_add' | 'student_remove' | 'group_create';
+  type: 'attendance' | 'score' | 'student_add' | 'student_remove' | 'group_create' | 'homework_warn';
   description: string;
   timestamp: string;
 }

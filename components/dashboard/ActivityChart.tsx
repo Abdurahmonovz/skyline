@@ -12,6 +12,7 @@ const ACTIVITY_ICONS: Record<Activity['type'], string> = {
   student_add: '➕',
   student_remove: '➖',
   group_create: '👥',
+  homework_warn: '✉️',
 };
 
 export default function ActivityChart() {

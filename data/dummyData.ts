@@ -1,4 +1,5 @@
-import { Group, Student, Attendance, Score } from '@/types';
+import { Group, Student, Attendance, MonthlyScoreSheet } from '@/types';
+import { emptyLessons } from '@/lib/monthlyScoreUtils';
 
 export const dummyGroups: Group[] = [
   {
@@ -86,25 +87,27 @@ export const dummyAttendance: Attendance[] = [
   },
 ];
 
-export const dummyScores: Score[] = [
-  {
-    id: '1',
-    studentId: '1',
-    groupId: '1',
-    date: new Date().toISOString(),
-    homeworkScore: 85,
-    activityScore: 90,
-    examScore: 88,
-    totalScore: 87.67,
-  },
-  {
-    id: '2',
-    studentId: '2',
-    groupId: '1',
-    date: new Date().toISOString(),
-    homeworkScore: 92,
-    activityScore: 88,
-    examScore: 91,
-    totalScore: 90.33,
-  },
-];
+/** Namuna: oy uchun 12 dars + imtihon (1-oquvchi o‘tadi, 2-yiqiladi) */
+export function buildDummyMonthlyScoreSheets(): MonthlyScoreSheet[] {
+  const yearMonth = new Date().toISOString().slice(0, 7);
+  const passLessons = emptyLessons().map(() => ({ homework: 4, activity: 3 }));
+  const failLessons = emptyLessons().map(() => ({ homework: 2, activity: 1 }));
+  return [
+    {
+      id: `dummy-1-1-${yearMonth}`,
+      studentId: '1',
+      groupId: '1',
+      yearMonth,
+      lessons: passLessons,
+      examScore: 20,
+    },
+    {
+      id: `dummy-2-1-${yearMonth}`,
+      studentId: '2',
+      groupId: '1',
+      yearMonth,
+      lessons: failLessons,
+      examScore: 10,
+    },
+  ];
+}

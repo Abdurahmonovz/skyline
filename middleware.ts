@@ -10,6 +10,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  /** POST redirect sessiyada fetch ni buzishi mumkin — sessiyani route ichida tekshiramiz */
+  if (pathname.startsWith('/api/telegram/')) {
+    return NextResponse.next();
+  }
+
   if (pathname.startsWith('/login')) {
     const existing = request.cookies.get(AUTH_COOKIE)?.value;
     if (existing) {

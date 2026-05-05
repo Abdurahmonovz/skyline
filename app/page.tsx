@@ -3,7 +3,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { StorageService } from '@/lib/storage';
-import { dummyGroups, dummyStudents, dummyAttendance, dummyScores } from '@/data/dummyData';
+import {
+  dummyGroups,
+  dummyStudents,
+  dummyAttendance,
+  buildDummyMonthlyScoreSheets,
+} from '@/data/dummyData';
 
 export default function HomePage() {
   const router = useRouter();
@@ -15,7 +20,7 @@ export default function HomePage() {
       StorageService.saveGroups(dummyGroups);
       StorageService.saveStudents(dummyStudents);
       StorageService.saveAttendance(dummyAttendance);
-      StorageService.saveScores(dummyScores);
+      StorageService.saveMonthlyScoreSheets(buildDummyMonthlyScoreSheets());
     }
     
     router.push('/dashboard');
