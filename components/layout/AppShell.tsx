@@ -8,7 +8,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex">
+    <div className="flex h-dvh max-h-dvh min-h-0 overflow-hidden bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       {mobileNavOpen && (
         <button
           type="button"
@@ -18,9 +18,9 @@ export default function AppShell({ children }: { children: ReactNode }) {
         />
       )}
       <Sidebar mobileOpen={mobileNavOpen} onNavigate={() => setMobileNavOpen(false)} />
-      <div className="flex-1 flex flex-col min-w-0 lg:min-h-screen">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <TopNavbar onMenuClick={() => setMobileNavOpen((o) => !o)} />
-        <main className="flex-1 overflow-auto">{children}</main>
+        <main className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">{children}</main>
       </div>
     </div>
   );

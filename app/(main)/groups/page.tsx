@@ -12,6 +12,10 @@ import { useLocale } from '@/contexts/AppProviders';
 
 const emptyGroupForm = { name: '', direction: '', teacher: '', schedule: '' };
 
+function searchHaystack(value: unknown): string {
+  return String(value ?? '').toLowerCase();
+}
+
 export default function GroupsPage() {
   const { t } = useLocale();
   const [groups, setGroups] = useState<Group[]>([]);
@@ -27,10 +31,13 @@ export default function GroupsPage() {
   }, []);
 
   useEffect(() => {
-    const filtered = groups.filter(group =>
-      group.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      group.direction.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      group.teacher.toLowerCase().includes(searchTerm.toLowerCase())
+    const q = searchHaystack(searchTerm);
+    const filtered = groups.filter(
+      (group) =>
+        searchHaystack(group.name).includes(q) ||
+        searchHaystack(group.direction).includes(q) ||
+        searchHaystack(group.teacher).includes(q) ||
+        searchHaystack(group.schedule).includes(q)
     );
     setFilteredGroups(filtered);
   }, [searchTerm, groups]);

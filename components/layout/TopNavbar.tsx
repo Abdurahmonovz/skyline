@@ -30,7 +30,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-20 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700">
+    <header className="z-20 shrink-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center justify-between px-4 sm:px-6 py-4 gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <button

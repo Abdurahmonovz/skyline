@@ -27,11 +27,11 @@ export default function Sidebar({ mobileOpen = false, onNavigate }: SidebarProps
   return (
     <aside
       className={`
-        fixed left-0 top-0 z-40 h-full bg-white dark:bg-gray-900 shadow-2xl
+        fixed left-0 top-0 z-40 h-dvh max-h-dvh shrink-0 bg-white dark:bg-gray-900 shadow-2xl
         transition-all duration-300
         w-64 lg:z-20
         ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0 lg:relative lg:shadow-none lg:border-r lg:border-gray-200 lg:dark:border-gray-800
+        lg:translate-x-0 lg:relative lg:h-full lg:max-h-none lg:shadow-none lg:border-r lg:border-gray-200 lg:dark:border-gray-800
         ${isCollapsed ? 'lg:w-20' : 'lg:w-64'}
       `}
     >
