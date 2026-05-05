@@ -31,7 +31,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
 
   return (
     <header className="z-20 shrink-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-4 gap-3">
+      <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 gap-2 sm:gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <button
             type="button"
@@ -46,14 +46,14 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
           </h2>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-          <div className="flex items-center gap-0.5 sm:gap-1 rounded-xl border border-gray-200 dark:border-gray-600 p-0.5 bg-gray-50 dark:bg-gray-800/80">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-0.5 sm:gap-1 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-600 p-0.5 bg-gray-50 dark:bg-gray-800/80">
             {LOCALES.map(({ code, label }) => (
               <button
                 key={code}
                 type="button"
                 onClick={() => setLocale(code as Locale)}
-                className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors ${
+                className={`px-2 py-1 text-[11px] sm:text-xs font-semibold rounded-md sm:rounded-lg transition-colors ${
                   locale === code
                     ? 'bg-emerald-600 text-white'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -64,7 +64,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             ))}
           </div>
 
-          <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 tabular-nums whitespace-nowrap">
+          <div className="hidden md:block text-xs sm:text-sm text-gray-600 dark:text-gray-400 tabular-nums whitespace-nowrap">
             {currentTime
               ? `${currentTime.toLocaleDateString(
                   locale === 'ru' ? 'ru-RU' : locale === 'en' ? 'en-GB' : 'uz-UZ'
@@ -86,14 +86,14 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
           <button
             type="button"
             onClick={handleLogout}
-            className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-2"
+            className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-1.5 sm:px-2"
             title={t('top.logout')}
           >
             <span className="sm:hidden">🚪</span>
             <span className="hidden sm:inline">{t('top.logout')}</span>
           </button>
 
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center text-white text-sm font-semibold">
+          <div className="hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 items-center justify-center text-white text-sm font-semibold">
             A
           </div>
         </div>

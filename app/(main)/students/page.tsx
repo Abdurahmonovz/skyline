@@ -150,7 +150,7 @@ export default function StudentsPage() {
 
   if (loading) {
     return (
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, i) => (
             <CardSkeleton key={i} />
@@ -161,10 +161,10 @@ export default function StudentsPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('students.title')}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{t('students.title')}</h1>
           <p className="text-gray-600 dark:text-gray-400">{t('students.subtitle')}</p>
         </div>
         <div className="flex gap-2">

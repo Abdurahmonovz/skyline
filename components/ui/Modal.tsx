@@ -42,27 +42,27 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-4">
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
       <div
-        className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-h-[90vh] overflow-auto animate-slide-up ${panelClassName}`}
+        className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-auto animate-slide-up ${panelClassName}`}
       >
-        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h2>
+        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 pl-4 pr-12 sm:px-6 py-3 sm:py-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">{title}</h2>
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className="absolute top-3.5 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             ✕
           </button>
         </div>
-        <div className="p-6">{children}</div>
+        <div className="p-4 sm:p-6">{children}</div>
         {onConfirm && (
-          <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-end gap-3">
-            <Button variant="ghost" onClick={onClose} disabled={confirmLoading}>
+          <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-3 sm:px-6 sm:py-4 flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
+            <Button variant="ghost" onClick={onClose} disabled={confirmLoading} className="w-full sm:w-auto">
               {cancelText}
             </Button>
             <Button
@@ -72,6 +72,7 @@ export default function Modal({
               }}
               isLoading={confirmLoading}
               disabled={confirmLoading}
+              className="w-full sm:w-auto"
             >
               {confirmText}
             </Button>
