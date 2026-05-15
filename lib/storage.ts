@@ -1,5 +1,24 @@
-import { Group, Student, Attendance, Score, Activity, AppSettings, MonthlyScoreSheet } from '@/types';
+import {
+  Group,
+  Student,
+  Attendance,
+  Score,
+  Activity,
+  AppSettings,
+  MonthlyScoreSheet,
+} from '@/types';
 import { migrateScoresToMonthly, normalizeMonthlySheet } from '@/lib/monthlyScoreUtils';
+
+/** `exportAllData` / Excel eksport uchun yagona snaphot. */
+export interface SkylineExportSnapshot {
+  groups: Group[];
+  students: Student[];
+  attendance: Attendance[];
+  scores: Score[];
+  monthlyScores: MonthlyScoreSheet[];
+  homeworkWarnSig: Record<string, string>;
+  settings: AppSettings;
+}
 
 const STORAGE_KEYS = {
   GROUPS: 'skyline_groups',
@@ -254,8 +273,8 @@ export class StorageService {
   }
 
   // Export/Import
-  static exportAllData(): string {
-    const data = {
+  static getExportSnapshot(): SkylineExportSnapshot {
+    return {
       groups: this.getGroups(),
       students: this.getStudents(),
       attendance: this.getAttendance(),
@@ -264,7 +283,10 @@ export class StorageService {
       homeworkWarnSig: this.getHomeworkWarnSigMap(),
       settings: this.getSettings(),
     };
-    return JSON.stringify(data, null, 2);
+  }
+
+  static exportAllData(): string {
+    return JSON.stringify(this.getExportSnapshot(), null, 2);
   }
 
   static importAllData(jsonData: string): void {

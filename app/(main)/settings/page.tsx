@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { StorageService } from '@/lib/storage';
+import { downloadSkylineDataAsExcel } from '@/lib/exportExcel';
 import { AppSettings } from '@/types';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -36,14 +37,7 @@ export default function SettingsPage() {
   };
 
   const handleExportData = () => {
-    const data = StorageService.exportAllData();
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `skyline_backup_${new Date().toISOString()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadSkylineDataAsExcel(StorageService.getExportSnapshot());
   };
 
   const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { StorageService } from '@/lib/storage';
+import { downloadSkylineDataAsExcel } from '@/lib/exportExcel';
 import StudentCard from '@/components/students/StudentCard';
 import Modal from '@/components/ui/Modal';
 import Input from '@/components/ui/Input';
@@ -64,14 +65,7 @@ export default function StudentsPage() {
   };
 
   const handleExport = () => {
-    const data = StorageService.exportAllData();
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `students_${new Date().toISOString()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadSkylineDataAsExcel(StorageService.getExportSnapshot());
   };
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
