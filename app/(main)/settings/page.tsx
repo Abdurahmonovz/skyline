@@ -5,6 +5,7 @@ import { StorageService } from '@/lib/storage';
 import { downloadSkylineDataAsExcel } from '@/lib/exportExcel';
 import { AppSettings } from '@/types';
 import Button from '@/components/ui/Button';
+import AppIcon from '@/components/ui/AppIcon';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import { useLocale, useTheme } from '@/contexts/AppProviders';
@@ -129,7 +130,10 @@ export default function SettingsPage() {
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                   }`}
                 >
-                  ☀️ {t('settings.light')}
+                  <span className="inline-flex items-center gap-2">
+                    <AppIcon name="sun" size="sm" animation="pulse" />
+                    {t('settings.light')}
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -140,7 +144,10 @@ export default function SettingsPage() {
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                   }`}
                 >
-                  🌙 {t('settings.dark')}
+                  <span className="inline-flex items-center gap-2">
+                    <AppIcon name="moon" size="sm" animation="float" />
+                    {t('settings.dark')}
+                  </span>
                 </button>
               </div>
             </div>

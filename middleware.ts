@@ -47,6 +47,9 @@ export async function middleware(request: NextRequest) {
 
   try {
     await jwtVerify(token, getAuthSecret());
+    if (pathname === '/') {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
     return NextResponse.next();
   } catch {
     const url = request.nextUrl.clone();

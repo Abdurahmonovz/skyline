@@ -10,6 +10,7 @@ import {
 } from '@/lib/scoreConstants';
 import StatsCards from '@/components/dashboard/StatsCards';
 import ActivityChart from '@/components/dashboard/ActivityChart';
+import AppIcon from '@/components/ui/AppIcon';
 import { CardSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useLocale } from '@/contexts/AppProviders';
 import type { Student } from '@/types';
@@ -97,7 +98,10 @@ export default function DashboardPage() {
 
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
-          🏆 {t('dashboard.topStudents')}
+          <span className="inline-flex items-center gap-2">
+            <AppIcon name="trophy" size="lg" animation="pulse" className="text-amber-500" />
+            {t('dashboard.topStudents')}
+          </span>
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
           {t('dashboard.passThresholds', {

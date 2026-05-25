@@ -2,8 +2,10 @@
 
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import AppIcon from '@/components/ui/AppIcon';
 
 function LoginForm() {
   const router = useRouter();
@@ -28,8 +30,12 @@ function LoginForm() {
         setError('Login yoki parol notogri.');
         return;
       }
-      const next = searchParams.get('from');
-      router.replace(next && next.startsWith('/') && !next.startsWith('//') ? next : '/dashboard');
+      const from = searchParams.get('from');
+      const next =
+        from && from.startsWith('/') && !from.startsWith('//') && from !== '/'
+          ? from
+          : '/dashboard';
+      router.replace(next);
       router.refresh();
     } catch {
       setError('Serverga ulanib bolmadi.');
@@ -42,9 +48,13 @@ function LoginForm() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 via-white to-emerald-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 px-4 py-10">
       <div className="w-full max-w-md rounded-2xl border border-gray-200/80 bg-white/95 p-8 shadow-xl shadow-gray-200/50 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/95 dark:shadow-black/40">
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-xl font-bold text-white shadow-lg shadow-emerald-500/30">
-            S
-          </div>
+          <motion.div
+            className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <AppIcon name="sparkles" size="lg" animation="none" className="text-white" />
+          </motion.div>
           <h1 className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-2xl font-bold text-transparent dark:from-emerald-400 dark:to-emerald-300">
             Skyline Education
           </h1>

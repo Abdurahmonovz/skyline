@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LOCALES, type Locale } from '@/lib/i18n';
 import { useLocale, useTheme } from '@/contexts/AppProviders';
+import AppIcon from '@/components/ui/AppIcon';
 
 type TopNavbarProps = {
   onMenuClick?: () => void;
@@ -39,7 +40,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 shrink-0"
             aria-label="Menu"
           >
-            ☰
+            <AppIcon name="menu" size="lg" animation="hover" />
           </button>
           <h2 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white truncate">
             {t('top.welcome')}
@@ -80,7 +81,11 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label={isDark ? 'Light mode' : 'Dark mode'}
           >
-            {isDark ? '☀️' : '🌙'}
+            <AppIcon
+              name={isDark ? 'sun' : 'moon'}
+              size="md"
+              animation={isDark ? 'pulse' : 'float'}
+            />
           </button>
 
           <button
@@ -89,7 +94,9 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 px-1.5 sm:px-2"
             title={t('top.logout')}
           >
-            <span className="sm:hidden">🚪</span>
+            <span className="sm:hidden">
+              <AppIcon name="logout" size="md" animation="hover" />
+            </span>
             <span className="hidden sm:inline">{t('top.logout')}</span>
           </button>
 

@@ -7,6 +7,8 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
+import AppIcon from '@/components/ui/AppIcon';
+import type { IconName } from '@/lib/iconPaths';
 import { TableSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useLocale } from '@/contexts/AppProviders';
 import {
@@ -369,15 +371,35 @@ export default function ScoresPage() {
       </div>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">🏆 {t('scores.top5')}</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <AppIcon name="trophy" size="lg" animation="pulse" className="text-amber-500" />
+          {t('scores.top5')}
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {topStudents.map((student, index) => {
             const barPct = Math.min(100, cap > 0 ? (student.monthScore / cap) * 100 : 0);
             return (
               <Card key={student.id} hover>
                 <div className="p-4 text-center">
-                  <div className="text-3xl mb-2">
-                    {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '📘'}
+                  <div className="flex justify-center mb-2">
+                    <AppIcon
+                      name={
+                        (['medalGold', 'medalSilver', 'medalBronze', 'book'] as IconName[])[index] ??
+                        'book'
+                      }
+                      size="xl"
+                      variant="soft"
+                      animation="float"
+                      className={
+                        index === 0
+                          ? 'text-amber-500'
+                          : index === 1
+                            ? 'text-gray-400'
+                            : index === 2
+                              ? 'text-amber-700'
+                              : 'text-emerald-600'
+                      }
+                    />
                   </div>
                   <div className="font-semibold text-gray-900 dark:text-white">
                     {student.firstName} {student.lastName}

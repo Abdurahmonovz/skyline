@@ -1,6 +1,7 @@
 'use client';
 
 import Card from '@/components/ui/Card';
+import AppIcon from '@/components/ui/AppIcon';
 import { Student, Group } from '@/types';
 import { formatTelegramRecipient } from '@/lib/telegramTarget';
 
@@ -34,36 +35,36 @@ export default function StudentCard({ student, group, onEdit, onDelete }: Studen
               onClick={() => onEdit(student)}
               className="text-gray-400 hover:text-emerald-600 transition-colors"
             >
-              ✏️
+              <AppIcon name="edit" size="sm" animation="wiggle" />
             </button>
             <button
               onClick={() => onDelete(student.id)}
               className="text-gray-400 hover:text-red-600 transition-colors"
             >
-              🗑️
+              <AppIcon name="trash" size="sm" animation="hover" />
             </button>
           </div>
         </div>
 
         <div className="space-y-2 mb-4">
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
-            <span>📞</span>
+            <AppIcon name="phone" size="sm" animation="hover" className="shrink-0" />
             <span>{student.phone}</span>
           </div>
           {(student.telegramUsername || student.telegramId) && (
             <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
-              <span>💬</span>
+              <AppIcon name="message" size="sm" animation="hover" className="shrink-0" />
               <span>{formatTelegramRecipient(student)}</span>
             </div>
           )}
           {group && (
             <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
-              <span>👥</span>
+              <AppIcon name="groups" size="sm" animation="hover" className="shrink-0" />
               <span>{group.name}</span>
             </div>
           )}
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
-            <span>🎂</span>
+            <AppIcon name="cake" size="sm" animation="hover" className="shrink-0" />
             <span>{student.age} years old</span>
           </div>
         </div>
