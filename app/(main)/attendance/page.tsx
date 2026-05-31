@@ -141,6 +141,7 @@ function AttendanceInner() {
 
       const msgRes = await fetch('/api/telegram/send-message', {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           token: settings.botToken,
@@ -162,6 +163,7 @@ function AttendanceInner() {
         fd.append('file', selectedFile);
         const mediaRes = await fetch('/api/telegram/send-media', {
           method: 'POST',
+          credentials: 'include',
           body: fd,
         });
         const mediaJson = (await mediaRes.json()) as { ok?: boolean; description?: string };

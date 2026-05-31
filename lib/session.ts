@@ -16,10 +16,15 @@ export async function getSession(): Promise<SessionUser | null> {
   try {
     const { payload } = await jwtVerify(token, getAuthSecret());
     const userId = String(payload.sub ?? '');
-    const rawRole = String(payload.role ?? '');
-    const name = String(payload.name ?? '');
-    if (!userId || !isRole(rawRole)) return null;
-    return { userId, role: rawRole, name };
+    let rawRole = String(payload.role ?? '');
+    const name = String(payload.name ?? 'Admin');
+    if (!userId) return null;
+    // Eski login tokenlarida role bo‘lmagan — middleware o‘tkazardi, API esa rad etardi
+    if (!isRole(rawRole) && userId === 'skyline-admin') {
+      rawRole = 'ADMIN';
+    }
+    if (!isRole(rawRole)) return null;
+    return { userId, role: rawRole, name: name || 'Admin' };
   } catch {
     return null;
   }

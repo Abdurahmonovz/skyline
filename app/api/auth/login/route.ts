@@ -22,7 +22,11 @@ export async function POST(req: Request) {
   }
 
   const secret = getAuthSecret();
-  const token = await new SignJWT({ sub: 'skyline-admin' })
+  const token = await new SignJWT({
+    sub: 'skyline-admin',
+    role: 'ADMIN',
+    name: 'Admin',
+  })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('7d')
